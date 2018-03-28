@@ -22,8 +22,6 @@ stages:
   # to an environment to do integration testing.
   - name: deploy-dev
     if: branch = master AND type != pull_request
-  - name: integration-test
-    if: branch = master AND type != pull_request
   - name: promote-to-prod
     if: branch = master AND type != pull_request
   - name: deploy-prod
@@ -45,11 +43,9 @@ jobs:
         - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID_DEV
         - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY_DEV
         - pip install -r requirements.txt
-        - pip install -r requirements-dev.txt
       script:
         # Fixes strange failure. ref: https://github.com/travis-ci/travis-ci/issues/7940
         - export BOTO_CONFIG=/dev/null
-        - pytest -v tests/unit
         - sls package -v -r ${AWS_REGION}
       after_script:
         # Ensure our creds are cleaned up.
@@ -90,28 +86,6 @@ jobs:
         # otherwise the zone name is already resolved.
         - export SLS_HOSTED_ZONE_NAME=dev.training.serverlessops.io
         - sls deploy -v
-      after_script:
-        # Ensure our creds are cleaned up.
-        - rm -rf ~/.aws
-
-    - stage: integration-test
-      sudo: required
-      services:
-        - docker
-      language: python
-      python: '3.6'
-      install:
-        - pip install awscli
-        # Our SLS setup expects to find an AWS profile so let's just manage
-        # our creds this way.
-        - aws configure set default.region $AWS_REGION
-        - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID_DEV
-        - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY_DEV
-        - npm install -g serverless
-        - pip install -r requirements.txt
-        - pip install -r requirements-dev.txt
-      script:
-        - pytest -v tests/integration
       after_script:
         # Ensure our creds are cleaned up.
         - rm -rf ~/.aws
