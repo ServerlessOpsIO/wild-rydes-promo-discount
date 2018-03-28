@@ -15,10 +15,12 @@ def handler(event, context):
 
     # random slow down.
     if random.randint(1, 10) > 8:
+        _logger.info('Hit bottleneck....')
         time.sleep((100 - random.randint(5, 20)) / 100)
 
 
     if random.randint(1, 10) > 9:
+        _logger.info('JACKPOT!!!')
         discount_multiplier = (100 - random.randint(5, 20)) / 100
     else:
         discount_multiplier = 1
