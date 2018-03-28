@@ -27,7 +27,7 @@ provider:
 
 functions:
   GetPromoDiscount:
-    handler: handlers/get-promo-discount.handler
+    handler: handlers/get_promo_discount.handler
     description: "Return the promo discount value if there is one."
     memorySize: 128
     timeout: 10
