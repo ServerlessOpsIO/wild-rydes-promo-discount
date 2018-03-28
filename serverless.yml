@@ -9,7 +9,7 @@ custom:
   profile: "${opt:aws-profile, env:AWS_PROFILE, env:AWS_DEFAULT_PROFILE, 'default'}"
   log_level: "${env:LOG_LEVEL, 'INFO'}"
 
-  iopipe_token: "${env:IOPIPE_TOKEN}"
+  iopipe_token: "${env:IOPIPE_TOKEN, ''}"
   iopipe_profiler_enabled: "${env:IOPIPE_PROFILER_ENABLED, 'false'}"
 
   pythonRequirements:
