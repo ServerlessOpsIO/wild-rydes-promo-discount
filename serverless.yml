@@ -3,6 +3,7 @@ service: wild-rydes-promo-discount
 
 plugins:
   - serverless-python-requirements
+  - serverless-plugin-tracing
 
 custom:
   stage: "${opt:stage, env:SLS_STAGE, 'dev'}"
@@ -27,6 +28,14 @@ provider:
     IOPIPE_TOKEN: '${self:custom.iopipe_token}'
     IOPIPE_PROFILER_ENABLED: '${self:custom.iopipe_profiler_enabled}'
     XRAY_ENABLED: '${self:custom.xray_enabled}'
+  tracing: '${self:custom.xray_enabled}'
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "xray:PutTraceSegments"
+        - "xray:PutTelemetryRecords"
+      Resource:
+        - "*"
 
 functions:
   GetPromoDiscount:
