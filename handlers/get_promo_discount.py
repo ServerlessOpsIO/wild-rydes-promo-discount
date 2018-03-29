@@ -40,6 +40,7 @@ iopipe_token = os.environ.get('IOPIPE_TOKEN') or None
 iopipe = IOpipe(iopipe_token, plugins=iopipe_plugins)
 
 
+@iopipe
 def handler(event, context):
     '''Function entry'''
 
@@ -60,5 +61,5 @@ def handler(event, context):
         'statusCode': 201,
         'body': json.dumps(resp_body)
     }
-    return json.dumps(resp)
+    return resp
 
