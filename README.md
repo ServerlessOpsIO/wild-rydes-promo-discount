@@ -1,21 +1,21 @@
-# Serverless Framework AWS Python 3.6 Template
+# # Wild Rydes Promo Discount
 [![Serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)
+[![Build Status](https://travis-ci.org/ServerlessOpsIO/wild-rydes-promo-discount.svg?branch=master)](https://travis-ci.org/ServerlessOpsIO/wild-rydes-promo-discount)
 
-Creates a Python 3.6 Serverless Framework project for AWS.
+This is the Promo Discount service which returns a discount multiplier for ride requests.  It is part off an experiment that rewards certain users randomly based on their activities.
 
-Sets up a project with ServerlessOps project conventions. These conventions include:
+We plan to measure user retention and user generated revenue to see if randomized discounts make a difference.
 
-* AWS profile handling
-* stage handling
-* Python conventions
-  * directory layout
-  * logging
+## Resources
 
-## Usage
-To use, provide the url to this repository when creating a project.
+This will create:
+* Lambda Function
+* API Gateway
 
-```
-sls create -u https://github.com/ServerlessOpsIO/sls-aws-python-36 -p <PATH> -n <NAME>
-```
+## Outputs
+
+__WildRydesPromoDiscountInvokeUrl:__ URL of API Gateway.
+
+__WildRydesGetPromoDiscountUrl:__ URL of _GetPromoDiscount_ endpoint.
 
